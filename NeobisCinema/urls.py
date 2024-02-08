@@ -27,10 +27,9 @@ router.register("users", UserViewSet, basename="user")
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api/", include(router.urls)),
-    path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
-    path('purchasehistories/', PurchaseHistoryListCreateAPIView.as_view(), name='purchasehistory-list-create'),
-    path('purchasehistories/<int:pk>', PurchaseHistoryRetrieveUpdateDestroyAPIView.as_view(), name='purchasehistory-retrieve-update-destroy'),
+    path("users/", include("users.urls")), # Изменение пути для пользователей
+    path("hall/", include("hall.urls")), # изменение путей для зала
+
 ]
 
 

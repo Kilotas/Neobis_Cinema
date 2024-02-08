@@ -17,12 +17,12 @@ class UserViewSet(ModelViewSet):
 
 
 class PurchaseHistoryListCreateAPIView(APIView):
-    def get(self, request):
+    def get(self, request, *args, **kwargs):
         queryset = PurchaseHistory.objects.all()
         serializer = PurchaseHistorySerializer(queryset, many=True) # many=True означает что нужно сериализовать несколько объектов
         return Response(serializer.data)
 
-    def post(self, request):
+    def post(self, request, *args, **kwargs):
         serializer = PurchaseHistorySerializer(data=request.data) # создается экземпляр сериализатора
         if serializer.is_valid():
             serializer.save()
