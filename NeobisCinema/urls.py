@@ -29,6 +29,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("users/", include("users.urls")), # Изменение пути для пользователей
     path("hall/", include("hall.urls")), # изменение путей для зала
+    path("movies/", include("movies.urls")),
 
 ]
 
