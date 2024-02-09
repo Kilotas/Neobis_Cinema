@@ -65,7 +65,7 @@ class ShowTimes(models.Model):
     hall = models.ForeignKey(Hall, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return f"{self.start_sessions} - {self.end_session} {self.movie}"
+        return f"{self.start_sessions} - {self.end_sessions} {self.movie}"
 
     class Meta:
         verbose_name = "Сеансы"
