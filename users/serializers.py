@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 from rest_framework import serializers
-from .models import User, PurchaseHistory, Feedback
+from .models import User, PurchaseHistory, Feedback, ClubCard
 
 class UserSerializer(ModelSerializer):
 
@@ -16,13 +16,18 @@ class UserSerializer(ModelSerializer):
         return user
 
 
-class PurchaseHistorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = PurchaseHistory
-        fields = ['id', 'user', 'timestamp', 'total_amount']
+#class PurchaseHistorySerializer(serializers.ModelSerializer):
+#    class Meta:
+#        model = PurchaseHistory
+#        fields = ['id', 'user', 'timestamp', 'total_amount']
 
 class FeedbackSerializer(ModelSerializer):
     class Meta:
         model = Feedback
         fields = ['id', 'user', 'text']
+
+class ClubCardSerializer(ModelSerializer):
+    class Meta:
+        model = ClubCard
+        fields = ['id', 'user', 'points']
 

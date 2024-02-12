@@ -5,7 +5,7 @@ from django.db import models
 # Create your models here.
 class HallType(models.Model):
     name = models.CharField(max_length=20)
-    price = models.IntegerField()
+    price = models.IntegerField(default=1)
 
     def __str__(self):
         return f" The id {self.id}: the name {self.name} - the price {self.price}"

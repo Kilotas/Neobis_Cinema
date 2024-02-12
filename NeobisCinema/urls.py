@@ -19,7 +19,7 @@ from django.urls import include, path
 
 from rest_framework import routers
 
-from users.views import UserViewSet, PurchaseHistoryListCreateAPIView, PurchaseHistoryRetrieveUpdateDestroyAPIView
+from users.views import UserViewSet
 
 router = routers.DefaultRouter()
 router.register("users", UserViewSet, basename="user")
@@ -30,6 +30,7 @@ urlpatterns = [
     path("users/", include("users.urls")), # Изменение пути для пользователей
     path("hall/", include("hall.urls")), # изменение путей для зала
     path("movies/", include("movies.urls")),
+    path("orders/", include("orders.urls")),
 
 ]
 

@@ -1,20 +1,19 @@
-
 from django.urls import path
-from .views import UserViewSet, PurchaseHistoryListCreateAPIView, PurchaseHistoryRetrieveUpdateDestroyAPIView, FeedbackViewSet
+from rest_framework.routers import DefaultRouter
+from .views import UserViewSet, FeedbackViewSet, CustomClubCardViewSet
 
-urlpatterns = [
-    # URL-адреса для пользователей
-    path('users/', UserViewSet.as_view({'get': 'list', 'post': 'create'}), name='user-list'),
-    path('users/<int:pk>/', UserViewSet.as_view({'get': 'retrieve', 'put': 'update', 'patch': 'partial_update', 'delete': 'destroy'}), name='user-detail'),
+# Создаем экземпляр DefaultRouter
+router = DefaultRouter()
 
-    # URL-адреса для списка покупок и их деталей
-    path('purchasehistories/', PurchaseHistoryListCreateAPIView.as_view(), name='purchasehistory-list-create'),
-    path('purchasehistories/<int:pk>/', PurchaseHistoryRetrieveUpdateDestroyAPIView.as_view(), name='purchasehistory-retrieve-update-destroy'),
+# Регистрируем представления в роутере
+router.register(r'users', UserViewSet, basename='user')
 
-    # URL-адреса для обратной связи (Feedback)
-    path('feedbacks/', FeedbackViewSet.as_view({'get': 'list', 'post': 'create'}), name='feedback-list'),
-    path('feedbacks/<int:pk>/', FeedbackViewSet.as_view({'get': 'retrieve', 'put': 'update', 'patch': 'partial_update', 'delete': 'destroy'}), name='feedback-detail'),
-]
+router.register(r'feedbacks', FeedbackViewSet, basename='feedback')
+router.register(r'clubcards', CustomClubCardViewSet, basename='clubcard')
+
+# Получаем маршруты URL из роутера
+urlpatterns = router.urls
+
 
 
 

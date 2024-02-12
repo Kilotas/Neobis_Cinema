@@ -5,7 +5,7 @@ from .models import HallType, Hall, Seat
 class HallSerializer(ModelSerializer):
     class Meta:
         model = Hall
-        fields = ['id', 'name', 'price']
+        fields = ['id', 'name', 'hall_type']
 
 
 class HallTypeSerializer(ModelSerializer):

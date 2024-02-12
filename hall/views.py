@@ -45,7 +45,6 @@ class HallAPIView(APIView):
             return Response(serializer.data)
         else:
             hall = Hall.objects.all()
-            serializer = Hall.objects.all()
             serializer = HallSerializer(hall, many=True)
             return Response(serializer.data)
 

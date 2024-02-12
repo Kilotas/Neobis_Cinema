@@ -24,3 +24,12 @@ class Feedback(models.Model):
     class Meta:
         verbose_name = "Отзыв"
         verbose_name_plural = "Отзывы"
+
+class ClubCard(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE) # одному пользователю может быть назначена только одна скидочная карта
+    discount = models.IntegerField(default=0)
+    points = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"Club Card for {self.user.username}"
+
