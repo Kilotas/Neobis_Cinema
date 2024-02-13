@@ -1,10 +1,11 @@
 from django.shortcuts import render
-from datetime import datetime
+from datetime import date
 from rest_framework.viewsets import ModelViewSet
 from hall.permissions import IsAdminOrReadOnly
 from .models import Cinema, Movie, ShowTimes, MovieFormat
 from .serializers import CinemaSerializer, MovieFormatSerializer, MovieSerializers, ShowtimeSerializer
 from django.utils import timezone
+from datetime import datetime
 # Create your views here.
 class MovieFormatViewSet(ModelViewSet):
     serializer_class = CinemaSerializer
@@ -19,30 +20,27 @@ class CinemaViewSet(ModelViewSet):
 class MovieViewSet(ModelViewSet):
     serializer_class = MovieSerializers
     permission_classes = [IsAdminOrReadOnly]
+    queryset = Movie.objects.all()
 
     def get_queryset(self):
-        current_date = timezone.now().date()
-        return Movie.objects.filter(date_start__lte=current_date, date_end__gte=current_date) #
-
+        current_date = datetime.today().date()
+        movies = Movie.objects.filter(date_start__gte=current_date, date_end__lte=current_date, is_active=True)
+        return movies
+ #
 class ShowtimesViewSet(ModelViewSet):
     serializer_class = ShowtimeSerializer
     permission_classes = [IsAdminOrReadOnly]
 
     def get_queryset(self):
-        # Получаем текущую дату и время
-        current_datetime = timezone.now()
+        current_datetime = datetime.now()
 
-        # Фильтруем фильмы, для получения тех, которые еще не закончились
         movies = Movie.objects.filter(date_end__gte=current_datetime.date())
-        # Теперь фильтруем сеансы, чтобы получить сеансы которые еще не начались
-
+ #  Смотрим фильмы которые еще не начались
         current_showtimes = ShowTimes.objects.filter(
             start_sessions__gte=current_datetime,
             movie__in=movies
         )
-
         return current_showtimes
-
 
 
 

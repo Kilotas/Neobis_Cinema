@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 from rest_framework import serializers
-from .models import User, PurchaseHistory, Feedback, ClubCard
+from .models import User, Feedback, ClubCard
 
 class UserSerializer(ModelSerializer):
 

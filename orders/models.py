@@ -6,7 +6,7 @@ from users.models import ClubCard
 
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    total_price = models.PositiveIntegerField(blank=True, null=True)
+    total_price = models.PositiveIntegerField(blank=True, null=True, default=0)
 
     def __str__(self):
         return f"{self.user}: {self.total_price}"
@@ -38,7 +38,7 @@ class TicketCategory(models.Model):
         verbose_name = "Тип билета"
 
 class Ticket(models.Model):
-    price = models.IntegerField(blank=True, null=True)
+    price = models.IntegerField(blank=True, null=True, default=0)
     ticket_type = models.ForeignKey(TicketCategory, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     seats_id = models.ForeignKey(Seat, on_delete=models.CASCADE)
